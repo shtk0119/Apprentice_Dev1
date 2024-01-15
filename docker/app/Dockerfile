@@ -1,2 +1,2 @@
-FROM php:8.3.0-apache
+FROM php:8.3.1-apache
 WORKDIR /var/www/html
