@@ -17,6 +17,8 @@ docker ps
 
 **コンテナ内へ入る**
 ```
+docker compose exec <サービス名> bash
+
 docker container exec -it <コンテナ名 or コンテナID> bash
 
 docker exec -it <コンテナ名 or コンテナID> bash
