@@ -1,5 +1,5 @@
 ## 起動
-**イメージ構築 & コンテナ作成 & コンテナ起動**
+**イメージ構築&コンテナ作成&コンテナ起動**
 ```
 docker compose up -d --build
 ```
@@ -11,11 +11,15 @@ docker compose up -d --build
 **起動確認**
 ```
 docker compose ps
+
+docker ps
 ```
 
 **コンテナ内へ入る**
 ```
-docker compose exec -it <コンテナ名 or コンテナID> bash
+docker container exec -it <コンテナ名 or コンテナID> bash
+
+docker exec -it <コンテナ名 or コンテナID> bash
 ```
 |オプション|意味|
 | ----- | ----- |
@@ -40,7 +44,7 @@ docker compose stop
 docker compose down
 ```
 
-**コンテナ　& ボリューム & イメージ削除**
+**コンテナ&ボリューム&イメージ削除**
 ```
 docker comopse down --rmi all --volumes
 ```
