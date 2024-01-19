@@ -1,0 +1,20 @@
+//ベース設定のファイルを読み込む
+@import "common";
+
+#grid-container {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  /* 2列のGridを作成 */
+  grid-template-rows: auto;
+  /* 行の高さは自動 */
+  gap: 30px;
+  /* グリッドアイテム間のギャップ */
+  margin: 30px;
+}
+
+#header {
+  grid-column: 1 / -1;
+  /* ヘッダーを最初の行に配置し、全列を占有 */
+}
+
+/* 他の要素は自動的に次の行に配置されます */
