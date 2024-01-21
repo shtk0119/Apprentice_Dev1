@@ -51,6 +51,14 @@ CREATE TABLE `time_reports`(
     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時'
 );
 
+CREATE TABLE `daily_tasks`(
+    `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT '日別タスクID',
+    `task_id` INT NOT NULL COMMENT '外部キーtasks ID',
+    `user_id` INT NOT NULL COMMENT '外部キーusers ID',
+    `date` DATE NOT NULL COMMENT 'タスク登録日',
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時'
+);
+
 -- 外部キー制約
 ALTER TABLE `reports`
 ADD CONSTRAINT fk_reports_user
@@ -85,6 +93,18 @@ FOREIGN KEY (user_id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT,
 ADD CONSTRAINT fk_task_logs_tasks
+FOREIGN KEY (task_id)
+    REFERENCES tasks(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT;
+
+ALTER TABLE `daily_tasks`
+ADD CONSTRAINT fk_daily_tasks_user
+FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+ADD CONSTRAINT fk_daily_tasks_task
 FOREIGN KEY (task_id)
     REFERENCES tasks(id)
     ON UPDATE CASCADE
@@ -202,19 +222,6 @@ VALUES
     ('02:05:00', 7, 1),
     ('01:48:00', 10, 2);
 
-ALTER TABLE `time_reports` auto_increment = 1;
--- 時間管理サンプルデータ取得クエリ
-INSERT INTO `time_reports` (`total_time`, `avg_time`, `task_id`, `user_id`)
-SELECT
-    SEC_TO_TIME(SUM(TIME_TO_SEC(`time`))) AS `total_time`,  -- 累計タスク実行時間
-    SEC_TO_TIME(AVG(TIME_TO_SEC(`time`))) AS `avg_time`,    -- 平均タスク実行時間
-    `task_id`,
-    `user_id`
-FROM
-    `task_logs`
-GROUP BY
-    `task_id`, `user_id`;
-
 -- 日報サンプルデータ
 ALTER TABLE `reports` auto_increment = 1;
 INSERT INTO `reports` (`text`, `user_id`, `created_at`)
@@ -256,3 +263,25 @@ VALUES
     ('提案された改善点を実装しています。', 2, '2024-03-08 10:15:00'),
     ('新しいバージョンのリリースが近づいています。', 3, '2024-03-09 12:30:00'),
     ('週次レポートを作成しています。', 1, '2024-03-10 14:55:00');
+
+ALTER TABLE `time_reports` auto_increment = 1;
+-- 時間管理サンプルデータ取得クエリ
+INSERT INTO `time_reports` (`total_time`, `avg_time`, `task_id`, `user_id`)
+SELECT
+    SEC_TO_TIME(SUM(TIME_TO_SEC(`time`))) AS `total_time`,  -- 累計タスク実行時間
+    SEC_TO_TIME(AVG(TIME_TO_SEC(`time`))) AS `avg_time`,    -- 平均タスク実行時間
+    `task_id`,
+    `user_id`
+FROM
+    `task_logs`
+GROUP BY
+    `task_id`, `user_id`;
+
+INSERT INTO `daily_tasks` (`user_id`, `task_id`, `date`)
+VALUES
+    (1, 2, "2024-01-21"),
+    (1, 5, "2024-01-21"),
+    (1, 3, "2024-01-21"),
+    (1, 7, "2024-01-21"),
+    (1, 1, "2024-01-21"),
+    (1, 8, "2024-01-21");
