@@ -1,20 +1,77 @@
 //ベース設定のファイルを読み込む
 @import "common";
 
-#grid-container {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  /* 2列のGridを作成 */
-  grid-template-rows: auto;
-  /* 行の高さは自動 */
-  gap: 30px;
-  /* グリッドアイテム間のギャップ */
-  margin: 30px;
-}
+// #grid-container {
+//   display: grid;
+//   grid-template-columns: 60% 40%;
+//   /* 2列のGridを作成 */
+//   grid-template-rows: auto;
+//   /* 行の高さは自動 */
+//   gap: 30px;
+//   /* グリッドアイテム間のギャップ */
+//   margin: 30px;
+// }
 
-#header {
-  grid-column: 1 / -1;
-  /* ヘッダーを最初の行に配置し、全列を占有 */
-}
+// #header {
+//   grid-column: 1 / -1;
+//   /* ヘッダーを最初の行に配置し、全列を占有 */
+// }
 
 /* 他の要素は自動的に次の行に配置されます */
+#grid-container {
+  background-color: $base_color;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 3% 2%;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "main";
+  grid-template-rows: 3rem 1fr;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  overflow: auto;
+
+
+
+  & #header {
+    grid-area: header;
+  }
+
+  & #main {
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+      "graph timer"
+      "graph report"
+      "task report";
+    grid-template-rows: 2fr 1fr 3fr;
+    grid-template-columns: 3fr 2fr;
+    gap: 1.5rem;
+    overflow: auto;
+
+
+    & #graph {
+      grid-area: graph;
+      overflow: auto;
+    }
+
+    & #task {
+      grid-area: task;
+      overflow: auto;
+    }
+
+    & #timer {
+      grid-area: timer;
+      overflow: auto;
+    }
+
+    & #report {
+      grid-area: report;
+      overflow: auto;
+    }
+
+  }
+}
