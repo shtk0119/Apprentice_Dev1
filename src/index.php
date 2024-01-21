@@ -13,34 +13,34 @@
   <title>ちょうどいいタスク管理アプリ</title>
 </head>
 
-<body>
-  <div id="grid-container">
-    <!-- ヘッダーナビゲーション -->
-    <div id="header">
-      <?php include 'header/header.php'; ?>
-    </div>
+<body id="grid-container">
+  <!-- ヘッダーナビゲーション -->
+  <header id="header">
+    <?php include 'header/header.php'; ?>
+  </header>
+  <main id="main">
     <!-- グラフ -->
     <div id="graph">
       <!-- グラフのコード -->
       <?php include 'graph/graph.php'; ?>
     </div>
-    <!-- カレンダー・タイマー -->
-    <div id="calendar">
-      <?php include 'calendar/calendar.php'; ?>
-    </div>
     <!-- 実績 -->
-    <div id="report">
+    <div id="task">
       <!-- 実績のコード -->
-      <?php include 'report/report.php'; ?>
-    </div>
-    <!-- タスク管理 -->
-    <div id="task-management">
-      <!-- タスク管理のコード -->
       <?php include 'task/task.php'; ?>
     </div>
+    <!-- タイマー管理 -->
+    <div id="timer">
+      <!-- タイマー管理のコード -->
+      <?php include 'timer/timer.php'; ?>
+    </div>
+    <div id="report">
+      <!-- タスク管理のコード -->
+      <?php include 'report/report.php'; ?>
+    </div>
 
 
-  </div>
+  </main>
 </body>
 
 </html>
