@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
+<?php
+require_once __DIR__.'/header/header.php';
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="header/css/style.css">
-  <link rel="stylesheet" type="text/css" href="calender/css/style.css">
-  <link rel="stylesheet" type="text/css" href="graph/css/style.css">
-  <link rel="stylesheet" type="text/css" href="report/css/style.css">
-  <link rel="stylesheet" type="text/css" href="task/css/style.css">
-  <title>ちょうどいいタスク管理アプリ</title>
-</head>
+\header\header();
+?>
 
-<body id="grid-container">
-  <!-- ヘッダーナビゲーション -->
-  <header id="header">
-    <?php include 'header/header.php'; ?>
-  </header>
   <main id="main">
     <!-- グラフ -->
     <div id="graph">
@@ -38,8 +24,6 @@
       <!-- タスク管理のコード -->
       <?php include 'report/report.php'; ?>
     </div>
-
-
   </main>
 </body>
 
