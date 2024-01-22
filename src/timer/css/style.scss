@@ -1,2 +1,59 @@
 //ベース設定のファイルを読み込む
 @import "common";
+
+.timer {
+  height: 100%;
+  &-task-select {
+    height: 60px;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+    appearance: none;
+    background-image: url("../images/Arrow_drop_down_big.svg");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+  }
+  
+  &-display {
+    height: 140px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-time {
+      font-size: 64px;
+      font-weight: bold;
+      text-align: center;
+      width: 70%;
+    }
+    
+    &-button {
+      background: none;
+      border: none;
+      border-radius: 100%;
+      width: 30%;
+      & img {
+        border-radius: 100%;
+        color: #ccc;
+        cursor: pointer;
+        height: 100px;
+        width: 100px;
+        &:hover {
+          filter: opacity(80%);
+        }
+      }
+
+      .clear {
+        display: none;
+      }
+    }
+  }
+}
