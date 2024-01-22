@@ -16,6 +16,7 @@ function header()
     <link rel="stylesheet" type="text/css" href="graph/css/style.css">
     <link rel="stylesheet" type="text/css" href="report/css/style.css">
     <link rel="stylesheet" type="text/css" href="task/css/style.css">
+    <link rel="stylesheet" type="text/css" href="timer/css/style.css">
     <title>ちょうどいいタスク管理アプリ</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
