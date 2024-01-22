@@ -1,4 +1,4 @@
-## UP
+## 起動
 **イメージ構築&コンテナ作成&コンテナ起動**
 ```
 docker compose up -d --build
