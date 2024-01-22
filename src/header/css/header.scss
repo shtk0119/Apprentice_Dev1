@@ -1,0 +1,155 @@
+//ベース設定のファイルを読み込む
+@import "common";
+
+.header {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem 0;
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1.5fr 6fr .5fr;
+    gap: 2rem;
+
+    &::before {
+        content: "";
+        width: 120vw;
+        height: 100vh;
+        background-color: $black_color;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: -10%;
+        z-index: 100;
+        pointer-events: none;
+        transition: all .5s ease-in-out;
+        clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+    }
+
+    &-logo {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        & img {
+            height: 2rem;
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    & .cal-container {
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+
+        &::before {
+            content: "";
+            width: 1.5rem;
+            aspect-ratio: 1/1;
+            background-color: $base_color;
+            border: none;
+            background-image: url(../images/cal.svg);
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        & .cal {
+            width: 1.5rem;
+            opacity: 0;
+        }
+
+        & .cal-date {
+            display: block;
+            white-space: nowrap;
+            font-weight: bold;
+            font-size: 24px;
+            padding-left: 1rem;
+        }
+
+    }
+
+    &-username {
+        width: 100%;
+        height: 100%;
+        text-align: end;
+
+        & span {}
+    }
+
+    &-humburger {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        cursor: pointer;
+        z-index: 99999;
+
+        &-top {
+            display: block;
+            width: 2rem;
+            height: 1px;
+            background-color: $black_color;
+            transform: translateY(.7rem);
+            transition: all ease-in-out .5s .1s;
+        }
+
+        &-bottom {
+            display: block;
+            width: 2rem;
+            height: 1px;
+            background-color: $black_color;
+            transform: translateY(.4rem);
+            transition: all ease-in-out .5s;
+        }
+
+
+    }
+
+    &-nav {
+        width: 15rem;
+        height: 100vh;
+        padding: 70px 35px;
+        position: fixed;
+        top: 0;
+        right: -20rem;
+        background-color: $base_color;
+        z-index: 9999;
+        transition: all .5s ease-in-out;
+
+        &-config {
+            display: block;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        &-logout {
+            display: block;
+            cursor: pointer;
+        }
+    }
+
+    &.open {
+
+        &.header::before {
+            opacity: .3;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        & .header-humburger-top {
+            transform: translateY(.75rem) rotate(15deg);
+        }
+
+        & .header-humburger-bottom {
+            transform: translateY(.7rem) rotate(345deg);
+        }
+
+        & .header-nav {
+            transform: translateX(-20rem);
+        }
+    }
+}
