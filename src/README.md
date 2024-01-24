@@ -33,3 +33,9 @@
 * index.phpのレイアウトは仮の状態です。開発がすすむにつれ変更を行います
 * index.phpへのCSSの反映が想定通りにならない可能性があります。調整が必要なので見つけたらご一報をお願いいたします。
 原因:一番下に読み込まれたCSSファイルが優先、important!による優先
+
+
+## 使用ライブラリ
+- **easytimer**  
+[jsDelivr](https://www.jsdelivr.com/package/npm/easytimer)  
+[Document](https://albert-gonzalez.github.io/easytimer.js)

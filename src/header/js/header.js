@@ -4,8 +4,8 @@ import { dateSubmit } from "./dateSubmit.js"
 
 // flatpickr実行
 flatpickr("#myCal", {
-    "locale": "en"
-})
+  "locale": "en"
+});
 
 // カレンダーの日付選択でPOSTリクエスト
 const calInput = document.querySelector(".cal");

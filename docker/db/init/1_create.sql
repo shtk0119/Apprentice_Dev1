@@ -129,7 +129,7 @@ VALUES
     ('PHPドキュメント学習', 2),
     ('AtCoder', 2),
     ('チームMTG', 2),
-    ('QUEST','3'),
+    ('QUEST', 3),
     ('アドバンスQUEST', 3),
     ('提出QUEST', 3),
     ('MTG', 3),
