@@ -5,7 +5,7 @@
 
     try {
       $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
-       // カレンダーの日付によって取得するログを変更できるようにする
+
       $stmt = $pdo->prepare("UPDATE task_logs SET time = :newTime WHERE id = :id");
       $stmt->bindParam(':newTime', $newTime, PDO::PARAM_STR);
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
