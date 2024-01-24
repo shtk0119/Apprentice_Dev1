@@ -1,14 +1,14 @@
 <?php
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $taskId = $_POST['taskId'];
+    $id = $_POST['id'];
     $newTime = $_POST['newTime'];
 
     try {
       $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
        // カレンダーの日付によって取得するログを変更できるようにする
-      $stmt = $pdo->prepare("UPDATE task_logs SET time = :newTime WHERE task_id = :taskId AND DATE(created_at) = CURDATE()");
+      $stmt = $pdo->prepare("UPDATE task_logs SET time = :newTime WHERE id = :id");
       $stmt->bindParam(':newTime', $newTime, PDO::PARAM_STR);
-      $stmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $stmt->execute();
 
       echo '時間が正常に更新されました';

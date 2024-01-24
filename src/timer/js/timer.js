@@ -22,7 +22,7 @@ timerButtonElement.addEventListener('click', () => {
       timer.pause();
       const updatedTime = timer.getTimeValues().toString();
       taskLogs[selectedIndex].time = updatedTime;
-      updateTaskTime(taskLogs[selectedIndex].task_id, updatedTime);
+      updateTaskTime(taskLogs[selectedIndex].id, updatedTime);
     }
   } else {
     alert('タスクを選択してください');
@@ -43,12 +43,12 @@ const timeStringToSeconds = (timeString) => {
   return totalSeconds;
 };
 
-const updateTaskTime = (taskId, newTime) => {
+const updateTaskTime = (id, newTime) => {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', 'timer/update-time.php', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   
-  const data = `taskId=${encodeURIComponent(taskId)}&newTime=${encodeURIComponent(newTime)}`;
+  const data = `id=${encodeURIComponent(id)}&newTime=${encodeURIComponent(newTime)}`;
   
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4 && xhr.status == 200) {
