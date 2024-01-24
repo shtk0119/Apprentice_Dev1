@@ -1,14 +1,15 @@
 <?php
+  $date = $_GET['date'];
+  
   try {
     $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
-    $dailyTasks = $pdo->query("SELECT * FROM daily_tasks");
+    $dailyTasks = $pdo->query("SELECT * FROM daily_tasks WHERE user_id = 1 AND date = '$date'");
 
     if ($dailyTasks) {
       foreach ($dailyTasks as $dailyTask) {
         $taskId = $dailyTask['task_id'];
         $task = $pdo->query("SELECT * FROM tasks WHERE id = $taskId");
-        // カレンダーの日付によって取得するログを変更できるようにする
-        $taskLog = $pdo->query("SELECT * FROM task_logs WHERE task_id = $taskId AND DATE(created_at) = CURDATE()");
+        $taskLog = $pdo->query("SELECT * FROM task_logs WHERE task_id = $taskId AND DATE(created_at) = '$date'");
         
         if ($task) {
           $tasks[] = $task->fetch(PDO::FETCH_ASSOC);
@@ -16,6 +17,7 @@
 
         if ($taskLog) {
           $taskLogs[] = $taskLog->fetch(PDO::FETCH_ASSOC);
+          var_dump($taskLogs);
         }
       }
     }
