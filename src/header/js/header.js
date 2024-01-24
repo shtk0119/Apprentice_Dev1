@@ -1,34 +1,22 @@
-import { setDate } from "./calDate.js";
-import { getQueryParams } from "../../js/getQueryParams.js";
-import { postDateQueryParams } from "../../js/postQueryParams.js";
 import { displayName } from "./display-name.js";
 import { humburgerMenu } from "./humburger.js";
+import { dateSubmit } from "./dateSubmit.js"
 
-const calInput = document.querySelector(".cal");
-
-humburgerMenu();
-
+// flatpickr実行
 flatpickr("#myCal", {
   "locale": "en"
 });
 
+// カレンダーの日付選択でPOSTリクエスト
+const calInput = document.querySelector(".cal");
+calInput.addEventListener("change", () => {
+    dateSubmit();
+})
+
+// HTMLが読み込まれたら、usernameを表示
 document.addEventListener("DOMContentLoaded", () => {
-	// 今日の日付を取得
-	const date = new Date();
-	const today = date.toLocaleDateString("sv-SE");
+    displayName();
+})
 
-	// URLクエリからdateを取得
-	const queryParamDate = getQueryParams("date");
-
-	// URLクエリをチェック
-	if (queryParamDate === null) postDateQueryParams(today);
-	
-	setDate(queryParamDate);
-	displayName();
-});
-
-calInput.addEventListener("change", (e) => {
-	const calValue = e.target.value;
-	setDate(calValue);
-	postDateQueryParams(calValue);
-});
+// ハンバーガーメニューアニメーション
+humburgerMenu();
