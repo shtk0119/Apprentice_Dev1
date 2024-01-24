@@ -1,23 +1,22 @@
-import { calInput, setSession, setDate } from "./cal-date.js";
 import { displayName } from "./display-name.js";
 import { humburgerMenu } from "./humburger.js";
+import { dateSubmit } from "./dateSubmit.js"
 
+// flatpickr実行
 flatpickr("#myCal", {
     "locale": "en"
 })
 
+// カレンダーの日付選択でPOSTリクエスト
+const calInput = document.querySelector(".cal");
+calInput.addEventListener("change", () => {
+    dateSubmit();
+})
+
+// HTMLが読み込まれたら、usernameを表示
 document.addEventListener("DOMContentLoaded", () => {
-    const date = new Date();
-    const today = date.toLocaleDateString('sv-SE');
-    setSession(today);
-    setDate();
     displayName();
 })
 
-calInput.addEventListener("change", () => {
-    const calVal = calInput.value;
-    setSession(calVal);
-    setDate();
-})
-
+// ハンバーガーメニューアニメーション
 humburgerMenu();
