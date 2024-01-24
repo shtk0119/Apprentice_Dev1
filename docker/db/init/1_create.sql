@@ -26,11 +26,13 @@ CREATE TABLE `tasks`(
 
 CREATE TABLE `task_logs`(
     `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT 'タスク実行記録ID',
-    `time` time NOT NULL DEFAULT '00:00:00' COMMENT 'タスク実行時間の累計(１日)',
+    `time` TIME NOT NULL DEFAULT '00:00:00' COMMENT 'タスク実行時間の累計(１日)',
+    `date` DATE NOT NULL COMMENT 'タスク登録日',
     `task_id` INT NOT NULL COMMENT '外部キーtasks ID',
     `user_id` INT NOT NULL COMMENT '外部キーusers ID',
-    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',
-    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時'
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
+    UNIQUE INDEX `unique_task_user_date_pair` (`task_id`, `user_id`, `date`)
 );
 
 CREATE TABLE `reports`(
@@ -49,14 +51,6 @@ CREATE TABLE `time_reports`(
     `user_id` INT NOT NULL COMMENT '外部キーusers ID',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',
     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時'
-);
-
-CREATE TABLE `daily_tasks`(
-    `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT '日別タスクID',
-    `task_id` INT NOT NULL COMMENT '外部キーtasks ID',
-    `user_id` INT NOT NULL COMMENT '外部キーusers ID',
-    `date` DATE NOT NULL COMMENT 'タスク登録日',
-    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時'
 );
 
 -- 外部キー制約
@@ -93,18 +87,6 @@ FOREIGN KEY (user_id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT,
 ADD CONSTRAINT fk_task_logs_tasks
-FOREIGN KEY (task_id)
-    REFERENCES tasks(id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT;
-
-ALTER TABLE `daily_tasks`
-ADD CONSTRAINT fk_daily_tasks_user
-FOREIGN KEY (user_id)
-    REFERENCES users(id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT,
-ADD CONSTRAINT fk_daily_tasks_task
 FOREIGN KEY (task_id)
     REFERENCES tasks(id)
     ON UPDATE CASCADE
@@ -161,70 +143,66 @@ VALUES
 
 ALTER TABLE `task_logs` auto_increment = 1;
 -- タスクログサンプルデータ
--- 今日
-INSERT INTO `task_logs` (`time`, `task_id`, `user_id`)
+INSERT INTO `task_logs` (`time`, `date`, `task_id`, `user_id`)
 VALUES
-    ('02:30:00', 1, 1),
-    ('01:45:00', 4, 1),
-    ('00:45:00', 13, 2),
-    ('03:15:00', 2, 2),
-    ('01:00:00', 5, 3),
-    ('02:00:00', 7, 1),
-    ('01:30:00', 10, 2),
-    ('00:50:00', 15, 3),
-    ('02:20:00', 8, 1),
-    ('01:10:00', 11, 3),
-    ('02:45:00', 3, 2),
-    ('01:20:00', 9, 3),
-    ('00:55:00', 12, 1),
-    ('02:10:00', 6, 1),
-    ('01:35:00', 14, 2);
--- 明日以降
-INSERT INTO `task_logs` (`time`, `task_id`, `user_id`, `created_at`, `updated_at`)
-VALUES
-    ('02:55:00', 1, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('03:00:00', 2, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:15:00', 5, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('02:25:00', 7, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:40:00', 10, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('00:48:00', 13, 2, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('02:05:00', 8, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:25:00', 11, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('02:50:00', 3, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:30:00', 9, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('00:58:00', 12, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('02:15:00', 6, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:22:00', 14, 2, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('01:18:00', 4, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY)),
-    ('03:05:00', 5, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:40:00', 7, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('01:55:00', 10, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('00:42:00', 13, 2, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:00:00', 8, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('01:12:00', 11, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:35:00', 3, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('01:28:00', 9, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('00:52:00', 12, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:18:00', 6, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('01:32:00', 14, 2, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:48:00', 2, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('01:08:00', 5, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('02:25:00', 7, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:40:00', 10, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('00:46:00', 13, 2, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('02:12:00', 8, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:20:00', 11, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('02:55:00', 3, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:18:00', 9, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('00:58:00', 12, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('02:22:00', 6, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:15:00', 14, 2, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:25:00', 4, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY)),
-    ('02:30:00', 2, 1, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 3 DAY)),
-    ('01:38:00', 5, 1, DATE_ADD(NOW(), INTERVAL 4 DAY), DATE_ADD(NOW(), INTERVAL 4 DAY)),
-    ('02:05:00', 7, 1, DATE_ADD(NOW(), INTERVAL 4 DAY), DATE_ADD(NOW(), INTERVAL 4 DAY)),
-    ('01:48:00', 10, 1, DATE_ADD(NOW(), INTERVAL 4 DAY), DATE_ADD(NOW(), INTERVAL 4 DAY)),
-    ('03:00:00', 1, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), DATE_ADD(NOW(), INTERVAL 2 DAY));
+    ('02:30:00', '2024-01-23', 1, 1),
+    ('01:45:00', '2024-01-23', 4, 1),
+    ('02:10:00', '2024-01-24', 6, 1),
+    ('02:00:00', '2024-01-23', 7, 1),
+    ('02:20:00', '2024-01-23', 8, 1),
+    ('00:55:00', '2024-01-24', 12, 1),
+    ('03:15:00', '2024-01-23', 2, 2),
+    ('02:45:00', '2024-01-23', 3, 2),
+    ('01:30:00', '2024-01-23', 10, 2),
+    ('00:45:00', '2024-01-23', 13, 2),
+    ('01:00:00', '2024-01-23', 5, 3),
+    ('01:20:00', '2024-01-24', 9, 3),
+    ('01:10:00', '2024-01-23', 11, 3),
+    ('00:50:00', '2024-01-23', 15, 3),
+    ('02:25:00', '2024-01-24', 7, 1),
+    ('02:05:00', '2024-01-24', 8, 1),
+    ('03:00:00', '2024-01-24', 2, 2),
+    ('01:40:00', '2024-01-24', 10, 2),
+    ('00:48:00', '2024-01-24', 13, 2),
+    ('01:35:00', '2024-01-24', 14, 2),
+    ('01:15:00', '2024-01-24', 5, 3),
+    ('01:25:00', '2024-01-24', 11, 3),
+    ('02:55:00', '2024-01-25', 1, 1),
+    ('01:18:00', '2024-01-25', 4, 1),
+    ('02:15:00', '2024-01-25', 6, 1),
+    ('02:40:00', '2024-01-25', 7, 1),
+    ('00:58:00', '2024-01-25', 12, 1),
+    ('02:50:00', '2024-01-25', 3, 2),
+    ('01:55:00', '2024-01-25', 10, 2),
+    ('01:22:00', '2024-01-25', 14, 2),
+    ('03:05:00', '2024-01-25', 5, 3),
+    ('01:30:00', '2024-01-25', 9, 3),
+    ('02:18:00', '2024-01-26', 6, 1),
+    ('02:00:00', '2024-01-26', 8, 1),
+    ('00:52:00', '2024-01-26', 12, 1),
+    ('02:48:00', '2024-01-26', 2, 2),
+    ('02:35:00', '2024-01-26', 3, 2),
+    ('00:42:00', '2024-01-26', 13, 2),
+    ('01:32:00', '2024-01-26', 14, 2),
+    ('01:28:00', '2024-01-26', 9, 3),
+    ('01:12:00', '2024-01-26', 11, 3),
+    ('02:22:00', '2024-01-27', 6, 1),
+    ('02:25:00', '2024-01-27', 7, 1),
+    ('02:12:00', '2024-01-27', 8, 1),
+    ('00:58:00', '2024-01-27', 12, 1),
+    ('02:55:00', '2024-01-27', 3, 2),
+    ('01:40:00', '2024-01-27', 10, 2),
+    ('00:46:00', '2024-01-27', 13, 2),
+    ('01:08:00', '2024-01-27', 5, 3),
+    ('01:18:00', '2024-01-27', 9, 3),
+    ('01:20:00', '2024-01-27', 11, 3),
+    ('03:00:00', '2024-01-28', 1, 1),
+    ('01:25:00', '2024-01-28', 4, 1),
+    ('02:05:00', '2024-01-28', 7, 1),
+    ('02:30:00', '2024-01-28', 2, 2),
+    ('01:48:00', '2024-01-28', 10, 2),
+    ('01:15:00', '2024-01-28', 14, 2),
+    ('01:38:00', '2024-01-28', 5, 3);
 
 -- 日報サンプルデータ
 ALTER TABLE `reports` auto_increment = 1;
@@ -280,24 +258,3 @@ FROM
     `task_logs`
 GROUP BY
     `task_id`, `user_id`;
-
-INSERT INTO `daily_tasks` (`user_id`, `task_id`, `date`)
-VALUES
-    (1, 2, DATE(NOW())),
-    (1, 5, DATE(NOW())),
-    (1, 3, DATE(NOW())),
-    (1, 7, DATE(NOW())),
-    (1, 1, DATE(NOW())),
-    (1, 8, DATE(NOW())),
-    (1, 5, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 3, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 7, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 1, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 8, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 2, DATE_ADD(DATE(NOW()), INTERVAL 1 DAY)),
-    (1, 5, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY)),
-    (1, 3, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY)),
-    (1, 7, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY)),
-    (1, 1, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY)),
-    (1, 8, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY)),
-    (1, 2, DATE_ADD(DATE(NOW()), INTERVAL 2 DAY));
