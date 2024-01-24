@@ -17,7 +17,6 @@
 
         if ($taskLog) {
           $taskLogs[] = $taskLog->fetch(PDO::FETCH_ASSOC);
-          var_dump($taskLogs);
         }
       }
     }
