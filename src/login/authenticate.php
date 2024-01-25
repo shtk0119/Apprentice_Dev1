@@ -36,12 +36,14 @@ if ($stmt->rowCount() == 1) {
   } else {
     // パスワードが一致しない場合のエラーメッセージ
     echo "パスワードが正しくありません。";
-    echo '<a href="login.php">新規登録画面に戻る</a>';
+    echo '<a href="login.php">ログイン画面に戻る</a>';
+    return; // ここで処理を終了
   }
 } else {
   // ユーザーが見つからない場合のエラーメッセージ
   echo "該当するユーザーが見つかりません。";
-  echo '<a href="login.php">新規登録画面に戻る</a>';
+  echo '<a href="login.php">ログイン画面に戻る</a>';
+  return; // ここで処理を終了
 }
 
 // データベース接続を閉じる

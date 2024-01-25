@@ -11,7 +11,6 @@
   <div class="login_wrapper">
 
     <img class="logo" src="./img/dev2logo.svg" width="200" height="66" alt="ちょうどいいタスク管理">
-    <p>テスト</p>
     <form action="register.php" method="post">
       <div>
         <label for="username">ユーザー名</label><br>
