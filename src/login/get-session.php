@@ -1,5 +1,5 @@
 <?php
-// セッションを開始ユーザーネームのセッション変数取得用テストコード
+// セッションを開始
 session_start();
 ?>
 
@@ -9,14 +9,14 @@ session_start();
 <!-- ページが読み込まれたあと→ユーザー変数をセッションストレージに保存 -->
 <script>
   window.onload = function() {
-    var usernameSpan = document.querySelector('.header-username-span-data');
-    var username = usernameSpan.getAttribute('data-username');
-    var userId = usernameSpan.getAttribute('data-userid');
+    const usernameSpan = document.querySelector('.header-username-span-data');
+    const username = usernameSpan.getAttribute('data-username');
+    const userId = usernameSpan.getAttribute('data-userid');
     sessionStorage.setItem('name', username); // キーnameでユーザー名を保存
     sessionStorage.setItem('user_id', userId); // キーuser_idでユーザーidを保存
 
 
-    // JavaScriptでリダイレクト
+    // リダイレクト
     window.location.href = '../index.php';
   };
 </script>
