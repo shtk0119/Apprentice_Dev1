@@ -72,6 +72,7 @@ li {
   padding: 0 2rem;
   background-color: #fff;
   overflow: auto;
+  position: relative;
 }
 .task .tasks-ul {
   width: 100%;
@@ -80,13 +81,17 @@ li {
 .task .tasks-li {
   width: 100%;
   height: 50px;
+}
+.task .tasks-form {
+  width: 100%;
+  height: 50px;
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  grid-template-columns: 3rem 6fr 1fr;
   gap: 2rem;
   overflow: auto;
   position: relative;
 }
-.task .tasks-li::before {
+.task .tasks-form::before {
   content: "";
   width: 100%;
   height: 1px;
@@ -98,22 +103,64 @@ li {
 .task .tasks-item {
   width: 100%;
   display: grid;
-  grid-template-columns: 3rem 6fr 1rem 3fr;
+  grid-template-columns: 6fr 3fr;
   align-items: center;
   gap: 1rem;
 }
+.task .tasks-item.completed {
+  opacity: 0.2;
+  pointer-events: none;
+}
+.task .tasks-item-complete {
+  background-color: transparent;
+  border: none;
+}
+.task .tasks-item-complete-icon {
+  fill: none;
+  stroke: #07B53B;
+}
+.task .tasks-item-complete svg {
+  opacity: 0.2;
+}
+.task .tasks-item-complete.completed svg {
+  opacity: 1;
+}
+.task .tasks-item-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 .task .tasks-item-input {
   width: 100%;
-  height: 30px;
+  height: 90%;
   font-size: 16px;
+  padding-left: 5%;
   border: none;
+  cursor: pointer;
+}
+.task .tasks-item-input:focus {
+  border: 1px solid gray;
 }
 .task .tasks-item-cancel {
   width: 1rem;
   aspect-ratio: 1/1;
   border: none;
   background-color: #fff;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 99999;
+}
+.task .tasks-item-cancel.show {
   opacity: 1;
+}
+.task .tasks-item-cancel.show svg path {
+  fill: gray;
 }
 .task .tasks-item-time {
   text-align: end;
@@ -128,10 +175,28 @@ li {
   height: 30px;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
+}
+.task .tasks-edit-rename.editing {
+  background-color: #07B53B;
+}
+.task .tasks-edit-rename.editing svg path {
+  fill: white;
 }
 .task .tasks-edit-trush {
   width: 30px;
   height: 30px;
   border: none;
   border-radius: 10px;
-}/*# sourceMappingURL=style.css.map */
+  cursor: pointer;
+}
+.task .tasks-edit-trush:hover {
+  background-color: orange;
+}
+.task .tasks-edit-trush:hover svg ellipse {
+  stroke: white;
+}
+.task .tasks-edit-trush:hover svg path {
+  fill: white;
+  stroke: white;
+}
