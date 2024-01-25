@@ -1,2 +1,85 @@
 //ベース設定のファイルを読み込む
 @import "../../css/common";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_wrapper {
+  width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#username,
+#email,
+#password {
+  width: 300px;
+  height: 45px;
+  border: solid 1px #ccc;
+  padding-left: 10px;
+
+}
+
+.logo {
+  padding-bottom: 25px;
+}
+
+//ボタンを真ん中に寄せる
+div>input[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 220px;
+  height: 40px;
+  font-size: small;
+  border-radius: 5px;
+}
+
+div>input[type="submit"] {
+  background-color: $accent_color;
+  color: #fff;
+  border: solid 1px $accent_color;
+
+}
+
+
+.button_1 {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: $accent_color;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+  border: solid 1px $accent_color;
+  width: 220px;
+  height: 40px;
+  font-size: small;
+  text-align: center;
+}
+
+input {
+  margin-bottom: 15px;
+}
+
+.login_p {
+  font-size: small;
+  text-align: center;
+}
+
+p {
+  color: red;
+}

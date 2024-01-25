@@ -3,15 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="login/css/style.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <title>ログインフォーム</title>
+  <title>新規登録フォーム</title>
 </head>
 
 <body>
   <div class="login_wrapper">
+
     <img class="logo" src="./img/dev2logo.svg" width="200" height="66" alt="ちょうどいいタスク管理">
-    <form action="authenticate.php" method="post">
+    <p>テスト</p>
+    <form action="register.php" method="post">
+      <div>
+        <label for="username">ユーザー名</label><br>
+        <input type="text" name="username" id="username" required>
+      </div>
       <div>
         <label for="email">メールアドレス</label><br>
         <input type="email" name="email" id="email" required>
@@ -21,12 +26,12 @@
         <input type="password" name="password" id="password" required>
       </div>
       <div>
-        <input type="submit" value="ログイン">
+        <input type="submit" value="新規登録">
       </div>
     </form>
     <div>
-      <p class=login_p>未登録の方はこちら</p>
-      <a href="signup.php" class="button_1">新規登録</a>
+      <p class=login_p>すでに登録済みの方はこちら</p>
+      <a href="login.php" class="button_1">ログイン</a>
     </div>
   </div>
 </body>
