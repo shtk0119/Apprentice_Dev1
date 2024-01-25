@@ -1,15 +1,14 @@
 <?php
-  $date = $_POST["datetime-local"] ?? date("Y-m-d");
+  require_once 'php/db-connect.php';
   
+  $date = $_POST["datetime-local"] ?? date("Y-m-d");
   try {
-    $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
-
     // login機能完成後、user_idをsessionから取得して使用
     $taskLogsResult = $pdo->query("SELECT * FROM task_logs WHERE user_id = 1 AND date = '$date'");
 
-    foreach ($taskLogsResult as $taskLog) {
-      $taskLogs[] = $taskLog;
-      $taskId = $taskLog['task_id'];
+    while ($row = $taskLogsResult->fetch(PDO::FETCH_ASSOC)) {
+      $taskLogs[] = $row;
+      $taskId = $row['task_id'];
       $task = $pdo->query("SELECT * FROM tasks WHERE id = $taskId");
       
       if ($task) {
