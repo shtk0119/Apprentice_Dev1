@@ -1,30 +1,31 @@
 <?php
   require_once 'php/db-connect.php';
-  
   $date = $_POST["datetime-local"] ?? date("Y-m-d");
+  // $userId = $_SESSION['user_id'];
+  
   try {
-    // login機能完成後、user_idをsessionから取得して使用
-    $taskLogsResult = $pdo->query("SELECT * FROM task_logs WHERE user_id = 1 AND date = '$date'");
+    $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
 
-    while ($row = $taskLogsResult->fetch(PDO::FETCH_ASSOC)) {
-      $taskLogs[] = $row;
-      $taskId = $row['task_id'];
-      $task = $pdo->query("SELECT * FROM tasks WHERE id = $taskId");
-      
-      if ($task) {
-        $tasks[] = $task->fetch(PDO::FETCH_ASSOC);
-      }
-    }
+    // $taskLogsResult = $pdo->query(
+    //   "SELECT tl.id, t.name, tl.time, tl.date, tl.user_id, tl.task_id FROM task_logs AS tl
+    //    INNER JOIN tasks AS t ON tl.task_id = t.id
+    //    WHERE tl.user_id = $userId AND tl.date = '$date'");
+
+    $taskLogsResult = $pdo->query(
+      "SELECT tl.id, t.name, tl.time, tl.date, tl.user_id, tl.task_id FROM task_logs AS tl
+       INNER JOIN tasks AS t ON tl.task_id = t.id
+       WHERE tl.user_id = 1 AND tl.date = '$date'");
+    $taskLogs = $taskLogsResult->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $error) {
-    echo "Error: " . $error->getMessage();
+    echo "データの取得に失敗しました。";
   }
 ?>
 
 <div class="timer">
   <select class="timer-task-select">
     <option hidden>タスクを選択</option>
-    <?php foreach ($tasks as $task) : ?>
-      <option value="<?php echo $task['name'] ?>"><?php echo $task['name'] ?></option>
+    <?php foreach ($taskLogs as $taskLog) : ?>
+      <option value="<?php echo $taskLog['name'] ?>"><?php echo $taskLog['name'] ?></option>
     <?php endforeach; ?>
   </select>
 
