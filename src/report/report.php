@@ -5,6 +5,7 @@ namespace report;
 require_once "./task/query.php";
 require_once "calc-time.php";
 require_once "exec-tasks.php";
+require_once 'get-report.php'; // 日報の取得
 
 use task\Query;
 use function report\getDailyTotaltime;
@@ -63,12 +64,28 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
         今日の振り返り
       </label>
       <div class="report-description-inner">
-        <textarea name="text" id="report-textarea" cols="30" rows="10"></textarea>
+        <!-- 日報ID:表示しない -->
+        <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
+        <!-- カレンダーの日付:表示しない -->
+        <input type="hidden" name="date" value="<?php echo $date; ?>">
+        <!-- 日報の内容 -->
+        <textarea name="text" id="report-textarea" cols="30" rows="10"><?= isset($report) ? htmlspecialchars($report, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
         <div class="button-area">
-          <button>保存</button>
+          <button type="button" id="register" class="report-register-button" onclick="report_register()">保存</button>
           <button>投稿</button>
         </div>
       </div>
     </div>
   </form>
 </div>
+
+
+<!-- ボタン処理 -->
+<script>
+  // 保存ボタンを押したあとの処理
+  function report_register() {
+    // DOM完了後に実行
+    document.getElementById('reportForm').submit(); // formの内容をregister.phpへPOST送信
+  }
+  // 投稿ボタンを押した後の処理
+</script>

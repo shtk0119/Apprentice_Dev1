@@ -25,7 +25,7 @@ if ($stmt->rowCount() == 1) {
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
   // パスワードが一致するか確認
-  if (password_verify($password, $user['pwd'])) {
+  if ($password == $user['pwd']) {
     // パスワードが一致した場合、セッション変数を設定
     $_SESSION['username'] = $user['name'];    // ユーザーのIDを'username'に設定
     $_SESSION['user_id'] = $user['id'];   // ユーザーの名前を'user_id'に設定
