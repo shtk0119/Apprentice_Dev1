@@ -33,6 +33,7 @@ function editTask($taskQuery, $userId, $date)
         $result = $taskQuery->chengeDeleteFlag($date, $userId);
         return $result;
     } else {
-        return;
+        $result = $taskQuery->dailyTasks($date, $userId);
+        return $result;
     }
 }
