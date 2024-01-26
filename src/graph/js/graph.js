@@ -3,10 +3,10 @@ new Chart(
   {
     type: 'bar',
     data: {
-      labels: timeReports.map(timeReport => timeReport.name),
+      labels: timeReports.map(timeReport => timeReport.name).concat(Array.from({ length: Math.max(0, 6 - timeReports.length) }, () => '')),
       datasets: [{
-        label: '1日/平均時間',
-        data: timeReports.map(timeReport => timeReport.avg_time),
+        label: '1日/平均時間 TOP5',
+        data: timeReports.map(timeReport => timeReport.avg_time).concat(Array.from({ length: Math.max(0, 6 - timeReports.length) }, () => 0)),
         backgroundColor: [
           '#FF000060',
           '#FF800060',
