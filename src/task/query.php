@@ -55,12 +55,12 @@ class Query
       ON tl.task_id = t.id
       INNER JOIN time_reports tr
       ON tl.task_id = tr.task_id
-      WHERE tl.date = :y_m_d and tl.user_id = :user_id;';
+      WHERE tl.date = :date and tl.user_id = :user_id;';
     try {
       $stmt = $this->conn->prepare($query);
       $pst = $stmt->execute(
         [
-          ':y_m_d' => $date,
+          ':date' => $date,
           ':user_id' => $userId
         ]
       );
@@ -167,7 +167,6 @@ class Query
     return $result;
   }
 
-
   function editTaskName($date, $userId)
   {
     $task_logs_id = $_POST["task-logs-id"];
@@ -182,7 +181,7 @@ class Query
       $stmt->execute(
         [
           ':name' => $editName,
-          ':task_logs_id'=> $task_logs_id
+          ':task_logs_id' => $task_logs_id
         ]
       );
     } catch (PDOException $e) {
@@ -193,7 +192,8 @@ class Query
     return $result;
   }
 
-  function chengeDeleteFlag($date, $userId){
+  function chengeDeleteFlag($date, $userId)
+  {
     $deleteFlag = $_POST["delete_flag"];
     $task_logs_id = $_POST["task-logs-id"];
     $query = '
@@ -206,7 +206,7 @@ class Query
       $stmt->execute(
         [
           ':delete_flag' => $deleteFlag,
-          ':task_logs_id'=> $task_logs_id
+          ':task_logs_id' => $task_logs_id
         ]
       );
     } catch (PDOException $e) {
@@ -215,5 +215,62 @@ class Query
 
     $result = $this->dailyTasks($date, $userId);
     return $result;
+  }
+
+  // ここから下は、実績コンポーネントで使用するメソッド
+  // 理想は、このクラスを抽象化してtask管理用とreport管理用クラスに切り分けたい
+
+  function getExecTask($userId)
+  {
+    $date = $_POST["datetime-local"] ?? date("Y-m-d");
+    $query = '
+      SELECT tl.time, t.name, tr.total_time, tl.id FROM task_logs tl
+      INNER JOIN tasks t
+      ON tl.task_id = t.id
+      INNER JOIN time_reports tr
+      ON tl.task_id = tr.task_id
+      WHERE tl.date = :date
+      AND tl.user_id = :user_id
+      ORDER BY tl.time DESC;
+      ';
+    try {
+      $stmt = $this->conn->prepare($query);
+      $pst = $stmt->execute(
+        [
+          ':date' => $date,
+          ':user_id' => $userId
+        ]
+      );
+      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $execTasks = array_filter($results, function ($result) {
+        return $result["time"] !== "00:00:00";
+      });
+      return $execTasks;
+    } catch (PDOException $e) {
+      echo "今日の実績が見つかりませんでした！" . PHP_EOL;
+    }
+  }
+
+  function editTime($editTime, $taskLogsId, $userId)
+  {
+    $query = '
+      UPDATE task_logs
+      SET time = :edit_time
+      WHERE id = :task_logs_id
+    ';
+    try {
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute(
+        [
+          ':edit_time' => $editTime,
+          ':task_logs_id' => $taskLogsId
+        ]
+      );
+    } catch (PDOException $e) {
+      echo "時間の編集登録ができませんでした。" . PHP_EOL;
+    }
+
+    $execTasks = $this->getExecTask($userId);
+    return $execTasks;
   }
 }
