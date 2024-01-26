@@ -24,6 +24,7 @@ function header()
     <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js" defer></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/en.js" defer></script>
     <script src="./header/js/header.js" type="module" defer></script>
+    <script src="./task/js/task.js" defer></script>
   </head>
 
   <body id="grid-container">
