@@ -1,17 +1,17 @@
 <?php
   $date = $_POST["datetime-local"] ?? date("Y-m-d");
-  $userId = $_SESSION['user_id'];
+  // $userId = $_SESSION['user_id'];
   
   try {
     $pdo = new PDO('mysql:host=db;dbname=chodoii_task;', 'root', 'pass');
 
     // $taskLogsResult = $pdo->query(
-    //   "SELECT tl.id, t.name, tl.time, tl.date FROM task_logs AS tl
+    //   "SELECT tl.id, t.name, tl.time, tl.date, tl.user_id, tl.task_id FROM task_logs AS tl
     //    INNER JOIN tasks AS t ON tl.task_id = t.id
     //    WHERE tl.user_id = $userId AND tl.date = '$date'");
 
     $taskLogsResult = $pdo->query(
-      "SELECT tl.id, t.name, tl.time, tl.date FROM task_logs AS tl
+      "SELECT tl.id, t.name, tl.time, tl.date, tl.user_id, tl.task_id FROM task_logs AS tl
        INNER JOIN tasks AS t ON tl.task_id = t.id
        WHERE tl.user_id = 1 AND tl.date = '$date'");
     $taskLogs = $taskLogsResult->fetchAll(PDO::FETCH_ASSOC);
