@@ -16,7 +16,7 @@
        WHERE tl.user_id = 1 AND tl.date = '$date'");
     $taskLogs = $taskLogsResult->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $error) {
-    "データの取得に失敗しました。";
+    echo "データの取得に失敗しました。";
   }
 ?>
 
