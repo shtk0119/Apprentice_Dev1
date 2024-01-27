@@ -23,7 +23,7 @@
         }
 
         &-totaltime {
-            font-weight: normal;
+            font-weight: bold;
         }
     }
 
@@ -31,15 +31,15 @@
     &-inner {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 3fr 1fr;
+        grid-template-rows: 3fr;
         gap: 1rem;
         overflow: auto;
         padding-top: 1rem;
-
     }
 
     &-ul {
         width: 100%;
+        padding-top: .5rem;
         display: flex;
         flex-direction: column;
         gap: .5rem;
@@ -48,22 +48,25 @@
 
     &-li {
         width: 100%;
-        height: 4rem;
-        padding: .2rem 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: .5rem;
-        position: relative;
 
-        &::before {
-            content: "";
+        & .report-task-form {
             width: 100%;
-            height: .5px;
-            background-color: $black_color;
-            position: absolute;
-            top: 50%;
-            left: 0;
+            height: 4rem;
+            padding: .2rem 0;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: .5rem;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: .5px;
+                background-color: $black_color;
+                position: absolute;
+                top: 50%;
+                left: 0;
+            }
         }
 
         &-top {
@@ -122,15 +125,27 @@
                         border: none;
                         font-size: .9rem;
                         font-weight: normal;
-
                     }
                 }
             }
 
             & .totaltime {
                 font-size: .9rem;
+                color: #999;
                 font-weight: normal;
+            }
+        }
 
+
+        &:nth-child(1) {
+            & .report-li-top {
+                & .rank {
+                    color: white;
+
+                    &::before {
+                        background-color: gold;
+                    }
+                }
             }
         }
 
@@ -153,18 +168,6 @@
 
                     &::before {
                         background-color: brown;
-                    }
-                }
-            }
-        }
-
-        &:nth-child(1) {
-            & .report-li-top {
-                & .rank {
-                    color: white;
-
-                    &::before {
-                        background-color: gold;
                     }
                 }
             }
