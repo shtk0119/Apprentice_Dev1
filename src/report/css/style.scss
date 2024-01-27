@@ -116,7 +116,7 @@
                 & .daily-time {
                     width: 100%;
 
-                    &-input{
+                    &-input {
                         width: 6rem;
                         background-color: transparent;
                         border: none;
@@ -175,6 +175,7 @@
         & label {
             font-size: 1rem;
             font-weight: normal;
+            padding-bottom: 10px;
         }
 
         &-inner {
@@ -185,16 +186,27 @@
             gap: 1rem;
 
             & textarea {
-
                 border: none;
                 border-radius: 10px;
+                padding: .8rem;
             }
 
             & .button-area {
                 display: flex;
                 justify-content: flex-end;
                 gap: 2rem;
+
+                & button {
+                    width: 5rem;
+                    height: 2rem;
+                    border-radius: 10px;
+                    border: none;
+                    background-color: $accent_color;
+                    color: white;
+                    font-size: .8rem;
+                    font-weight: normal;
+                    cursor: pointer;
+                }
             }
         }
     }
-}

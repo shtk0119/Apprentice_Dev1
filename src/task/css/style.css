@@ -44,6 +44,7 @@ li {
   gap: 1rem;
   overflow: auto;
 }
+
 .task-add {
   width: 100%;
   height: 100%;
@@ -53,18 +54,21 @@ li {
   margin-bottom: 2rem;
   overflow: auto;
 }
+
 .task-add-edit {
   background-color: #fff;
   padding: 0.5rem 2rem;
   border: none;
   border-radius: 10px;
 }
+
 .task-add-submit {
   color: #fff;
   border: none;
   border-radius: 10px;
   background-color: #07B53B;
 }
+
 .task .tasks {
   width: 100%;
   height: 100%;
@@ -73,14 +77,17 @@ li {
   overflow: auto;
   position: relative;
 }
+
 .task .tasks-ul {
   width: 100%;
   overflow: auto;
 }
+
 .task .tasks-li {
   width: 100%;
   height: 50px;
 }
+
 .task .tasks-form {
   width: 100%;
   height: 50px;
@@ -90,6 +97,7 @@ li {
   overflow: auto;
   position: relative;
 }
+
 .task .tasks-form::before {
   content: "";
   width: 100%;
@@ -99,6 +107,7 @@ li {
   position: absolute;
   bottom: 0;
 }
+
 .task .tasks-item {
   width: 100%;
   display: grid;
@@ -106,24 +115,30 @@ li {
   align-items: center;
   gap: 1rem;
 }
+
 .task .tasks-item.completed {
   opacity: 0.2;
   pointer-events: none;
 }
+
 .task .tasks-item-complete {
   background-color: transparent;
   border: none;
 }
+
 .task .tasks-item-complete-icon {
   fill: none;
   stroke: #07B53B;
 }
+
 .task .tasks-item-complete svg {
   opacity: 0.2;
 }
+
 .task .tasks-item-complete.completed svg {
   opacity: 1;
 }
+
 .task .tasks-item-inner {
   width: 100%;
   height: 100%;
@@ -131,6 +146,7 @@ li {
   align-items: center;
   position: relative;
 }
+
 .task .tasks-item-input {
   width: 100%;
   height: 90%;
@@ -139,9 +155,11 @@ li {
   border: none;
   cursor: pointer;
 }
+
 .task .tasks-item-input:focus {
   border: 1px solid gray;
 }
+
 .task .tasks-item-cancel {
   width: 1rem;
   aspect-ratio: 1/1;
@@ -155,20 +173,25 @@ li {
   cursor: pointer;
   z-index: 99999;
 }
+
 .task .tasks-item-cancel.show {
   opacity: 1;
 }
+
 .task .tasks-item-cancel.show svg path {
   fill: gray;
 }
+
 .task .tasks-item-time {
   text-align: end;
 }
+
 .task .tasks-edit {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .task .tasks-edit-rename {
   width: 30px;
   height: 30px;
@@ -176,12 +199,15 @@ li {
   border-radius: 10px;
   cursor: pointer;
 }
+
 .task .tasks-edit-rename.editing {
   background-color: #07B53B;
 }
+
 .task .tasks-edit-rename.editing svg path {
   fill: white;
 }
+
 .task .tasks-edit-trush {
   width: 30px;
   height: 30px;
@@ -189,13 +215,16 @@ li {
   border-radius: 10px;
   cursor: pointer;
 }
+
 .task .tasks-edit-trush:hover {
   background-color: orange;
 }
+
 .task .tasks-edit-trush:hover svg ellipse {
   stroke: white;
 }
+
 .task .tasks-edit-trush:hover svg path {
   fill: white;
   stroke: white;
-}/*# sourceMappingURL=style.css.map */
+}

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace report;
 
 require_once "./task/query.php";
@@ -20,6 +21,7 @@ $execTasks = getExecTask($reportQuery, $userId);
 $dailyTotaltime = getDailyTotaltime($execTasks);
 
 ?>
+
 <div class="report">
   <div class="report-header">
     <span class="report-header-title">
@@ -29,7 +31,7 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
       総学習時間: <?php echo $dailyTotaltime; ?>
     </span>
   </div>
-  <form class="report-inner" method="POST">
+  <div class="report-inner">
     <ul class="report-ul">
       <?php foreach ($execTasks as $key => $execTask) : ?>
         <li class="report-li">
@@ -59,7 +61,8 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
         </li>
       <?php endforeach; ?>
     </ul>
-    <div class="report-description">
+
+    <form method="POST" class="report-description" action="report/register.php">
       <label for="report-textarea">
         今日の振り返り
       </label>
@@ -71,21 +74,10 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
         <!-- 日報の内容 -->
         <textarea name="text" id="report-textarea" cols="30" rows="10"><?= isset($report) ? htmlspecialchars($report, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
         <div class="button-area">
-          <button type="button" id="register" class="report-register-button" onclick="report_register()">保存</button>
+          <button type="submit" name="register" id="register" class="report-register-button">保存</button>
           <button>投稿</button>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
-
-
-<!-- ボタン処理 -->
-<script>
-  // 保存ボタンを押したあとの処理
-  function report_register() {
-    // DOM完了後に実行
-    document.getElementById('reportForm').submit(); // formの内容をregister.phpへPOST送信
-  }
-  // 投稿ボタンを押した後の処理
-</script>

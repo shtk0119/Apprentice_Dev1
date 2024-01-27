@@ -44,7 +44,7 @@ CREATE TABLE `reports` (
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     `date` DATE NOT NULL COMMENT '日報登録日',
-    UNIQUE INDEX `unique_report_date` (`date`)
+    UNIQUE INDEX `unique_report_date_pair` (`date`, `user_id`)
 );
 
 
