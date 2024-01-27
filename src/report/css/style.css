@@ -45,20 +45,24 @@ li {
   gap: 0.8rem;
   overflow: auto;
 }
+
 .report-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .report-header-title {
   font-size: 0.7rem;
   line-height: 0.7rem;
   border: 0.5px solid #333333;
   padding: 0.3rem 0.5rem;
 }
+
 .report-header-totaltime {
   font-weight: bold;
 }
+
 .report-inner {
   display: grid;
   grid-template-columns: 1fr;
@@ -67,6 +71,7 @@ li {
   overflow: auto;
   padding-top: 1rem;
 }
+
 .report-ul {
   width: 100%;
   padding-top: 0.5rem;
@@ -75,6 +80,7 @@ li {
   gap: 0.5rem;
   overflow: auto;
 }
+
 .report-li {
   width: 100%;
 }
@@ -96,6 +102,7 @@ li {
   top: 50%;
   left: 0;
 }
+
 .report-li-top {
   width: 100%;
   display: flex;
@@ -104,12 +111,14 @@ li {
   gap: 2rem;
   position: relative;
 }
+
 .report-li-top .rank {
   margin-left: 1rem;
   position: relative;
   font-size: 0.8rem;
   color: #333333;
 }
+
 .report-li-top .rank::before {
   content: "";
   width: 1.5rem;
@@ -122,25 +131,31 @@ li {
   transform: translate(-50%, -50%);
   z-index: -1;
 }
+
 .report-li-top .task-name {
   font-weight: normal;
   font-size: 0.9rem;
 }
+
 .report-li-bottom {
   display: flex;
   justify-content: flex-end;
 }
+
 .report-li-bottom-inner {
   display: flex;
   justify-content: flex-start;
 }
+
 .report-li-bottom-inner label {
   width: 3rem;
   font-weight: normal;
 }
+
 .report-li-bottom-inner .daily-time {
   width: 100%;
 }
+
 .report-li-bottom-inner .daily-time-input {
   width: 6rem;
   background-color: transparent;
@@ -148,6 +163,7 @@ li {
   font-size: 0.9rem;
   font-weight: normal;
 }
+
 .report-li-bottom .totaltime {
   font-size: 0.9rem;
   color: #999;
@@ -162,19 +178,24 @@ li {
 .report-li:nth-child(2) .report-li-top .rank {
   color: white;
 }
+
 .report-li:nth-child(2) .report-li-top .rank::before {
   background-color: silver;
 }
+
 .report-li:nth-child(3) .report-li-top .rank {
   color: white;
 }
+
 .report-li:nth-child(3) .report-li-top .rank::before {
   background-color: brown;
 }
 .report-description label {
   font-size: 1rem;
   font-weight: normal;
+  padding-bottom: 10px;
 }
+
 .report-description-inner {
   width: 100%;
   height: 10rem;
@@ -182,12 +203,15 @@ li {
   flex-direction: column;
   gap: 1rem;
 }
+
 .report-description-inner textarea {
   border: none;
   border-radius: 10px;
+  padding: 0.5rem;
 }
+
 .report-description-inner .button-area {
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
-}/*# sourceMappingURL=style.css.map */
+}

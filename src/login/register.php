@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //登録処理
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $password = $_POST["password"]; // パスワードのハッシュ化を行わず、平文のパスワードを直接使用
     $sql = "INSERT INTO users (email, pwd, name, created_at) VALUES (:email, :pwd, :username, now())";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
