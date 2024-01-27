@@ -224,7 +224,7 @@ class Query
   {
     $date = $_POST["datetime-local"] ?? date("Y-m-d");
     $query = '
-      SELECT tl.time, t.name, tr.total_time, tl.id FROM task_logs tl
+      SELECT tl.time, t.name, tr.total_time, tl.id as task_logs_id, t.id as task_id FROM task_logs tl
       INNER JOIN tasks t
       ON tl.task_id = t.id
       INNER JOIN time_reports tr
@@ -251,7 +251,7 @@ class Query
     }
   }
 
-  function editTime($editTime, $taskLogsId, $userId)
+  function editTime($editTime, $taskLogsId, $userId, $taskId)
   {
     $query = '
       UPDATE task_logs
@@ -266,6 +266,17 @@ class Query
           ':task_logs_id' => $taskLogsId
         ]
       );
+
+      $stmt = $this->conn->prepare(
+        "UPDATE time_reports
+         SET total_time = (SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time))) FROM task_logs WHERE task_id = :taskId AND user_id = :userId),
+             avg_time = (SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(time))) FROM task_logs WHERE task_id = :taskId AND user_id = :userId)
+         WHERE task_id = :taskId AND user_id = :userId"
+      );
+      $stmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
+      $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+      $stmt->execute();
+
     } catch (PDOException $e) {
       echo "時間の編集登録ができませんでした。" . PHP_EOL;
     }

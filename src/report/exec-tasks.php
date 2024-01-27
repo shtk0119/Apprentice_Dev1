@@ -9,8 +9,9 @@ function getExecTask($reportQuery, $userId)
     if (isset($_POST["edit-time"])) {
         $editTime = $_POST["edit-time"];
         $taskLogsId = $_POST["task-logs-id"];
+        $taskId = $_POST["task-id"];
         if (isTimeType($editTime)) {
-            $execTasks = $reportQuery->editTime($editTime, $taskLogsId, $userId);
+            $execTasks = $reportQuery->editTime($editTime, $taskLogsId, $userId, $taskId);
             return $execTasks;
         }else{
             $execTasks = $reportQuery->getExecTask($userId);
