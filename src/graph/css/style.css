@@ -1,5 +1,3 @@
-@import '../../css/normalize.css';
-
 * {
   box-sizing: border-box;
   position: relative;
@@ -36,4 +34,4 @@ li {
 #wrapper {
   width: 100%;
   margin: 0 auto;
-}
+}/*# sourceMappingURL=style.css.map */

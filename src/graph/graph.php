@@ -2,14 +2,14 @@
   require_once 'php/db-connect.php';
 
   $date = $_POST["datetime-local"] ?? date("Y-m-d");
+  // $userId = $_SESSION['user_id'];
   try {
-    $userId = $_SESSION['user_id'];
-    $taskLogsResult = $pdo->query(
-      "SELECT task_id FROM task_logs
-       WHERE user_id = $userId AND date = '$date'");
     // $taskLogsResult = $pdo->query(
     //   "SELECT task_id FROM task_logs
-    //    WHERE user_id = 1 AND date = '$date'");
+    //    WHERE user_id = $userId AND date = '$date'");
+    $taskLogsResult = $pdo->query(
+      "SELECT task_id FROM task_logs
+       WHERE user_id = 1 AND date = '$date'");
     $taskIds = $taskLogsResult->fetchAll(PDO::FETCH_COLUMN);
 
     // 取得したtask_idをIN句に含めてtime_reportsを取得
