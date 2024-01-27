@@ -1,4 +1,3 @@
-@import 'normalize.css';
 * {
   box-sizing: border-box;
   position: relative;
@@ -199,4 +198,4 @@ li {
 .task .tasks-edit-trush:hover svg path {
   fill: white;
   stroke: white;
-}
+}/*# sourceMappingURL=style.css.map */

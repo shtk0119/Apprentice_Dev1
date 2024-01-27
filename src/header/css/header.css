@@ -1,4 +1,3 @@
-@import 'normalize.css';
 * {
   box-sizing: border-box;
   position: relative;
@@ -59,7 +58,8 @@ li {
   z-index: 100;
   pointer-events: none;
   transition: all 0.5s ease-in-out;
-  clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+  -webkit-clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+          clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
 }
 .header-logo {
   width: 100%;
@@ -152,7 +152,8 @@ li {
 }
 .header.open.header::before {
   opacity: 0.3;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 .header.open .header-humburger-top {
   transform: translateY(0.75rem) rotate(15deg);
@@ -162,4 +163,4 @@ li {
 }
 .header.open .header-nav {
   transform: translateX(-20rem);
-}
+}/*# sourceMappingURL=header.css.map */

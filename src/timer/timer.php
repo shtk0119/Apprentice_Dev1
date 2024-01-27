@@ -1,4 +1,5 @@
 <?php
+  require_once 'php/db-connect.php';
   $date = $_POST["datetime-local"] ?? date("Y-m-d");
   // $userId = $_SESSION['user_id'];
   

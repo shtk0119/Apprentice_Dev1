@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import 'normalize.css';
 * {
   box-sizing: border-box;
   position: relative;
@@ -80,4 +79,4 @@ li {
 #grid-container #main #report {
   grid-area: report;
   overflow: auto;
-}
+}/*# sourceMappingURL=style.css.map */

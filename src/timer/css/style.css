@@ -1,4 +1,3 @@
-@import 'normalize.css';
 * {
   box-sizing: border-box;
   position: relative;
@@ -47,7 +46,9 @@ li {
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 4px 4px 0 0;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-image: url("../images/Arrow_drop_down_big.svg");
   background-position: right 10px center;
   background-repeat: no-repeat;
@@ -89,4 +90,4 @@ li {
 }
 .timer-display-button .clear {
   display: none;
-}
+}/*# sourceMappingURL=style.css.map */
