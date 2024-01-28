@@ -5,7 +5,7 @@ $username = $_SESSION['username'];
 $text = $_POST['text'];
 
 function send_to_discord($username, $message) {
-  $webhook_url = 'https://discord.com/api/webhooks/1200679522547290152/nZ3cbyrAb-juMuLcLIAYNIKQKYAktET_pZPN_OWsDE_vQgpX4MAjArSnCSU3oNHhdlMd';
+  $webhook_url = 'https://discord.com/api/webhooks/1200828148707774594/2wPNQTJ3WngPpZzbGB8deYMTw8nQc5W8pT99yLrGBmD5EyjLXA5eMz_5yR_6vGiOzpFW';
   $option = array(
     'http'
   );
