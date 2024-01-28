@@ -1,6 +1,5 @@
 <?php
 
-
 namespace report;
 
 require_once "./task/query.php";
@@ -63,7 +62,7 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
         </li>
       <?php endforeach; ?>
     </ul>
-    <form class="report-description">
+    <form class="report-description" action="report/register.php" method="post">
       <label for="report-textarea">
         今日の振り返り
       </label>
