@@ -13,7 +13,7 @@ function getExecTask($reportQuery, $userId)
         if (isTimeType($editTime)) {
             $execTasks = $reportQuery->editTime($editTime, $taskLogsId, $userId, $taskId);
             return $execTasks;
-        }else{
+        } else {
             $execTasks = $reportQuery->getExecTask($userId);
             return $execTasks;
         }

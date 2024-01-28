@@ -51,7 +51,6 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
                 <div class="daily-time">
                   <label>時間:</label>
                   <input class="daily-time-input" name="edit-time" value="<?php echo $execTask["time"] ?>">
-                  </input>
                 </div>
               </div>
               <span class="totaltime">
