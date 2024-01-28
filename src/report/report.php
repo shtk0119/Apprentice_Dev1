@@ -74,9 +74,11 @@ $dailyTotaltime = getDailyTotaltime($execTasks);
         <textarea name="text" id="report-textarea" cols="30" rows="10"><?= isset($report) ? htmlspecialchars($report, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
         <div class="button-area">
           <button type="submit" name="register" id="register" class="report-register-button">保存</button>
-          <button>投稿</button>
+          <button type="submit" id="post" formaction="report/discord-post.php">投稿</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+<script src="report/js/alert.js"></script>
