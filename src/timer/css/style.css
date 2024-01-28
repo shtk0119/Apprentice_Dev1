@@ -39,7 +39,6 @@ li {
 .timer {
   height: 100%;
 }
-
 .timer-task-select {
   height: 60px;
   width: 100%;
@@ -48,14 +47,13 @@ li {
   border: 1px solid #ccc;
   border-radius: 4px 4px 0 0;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-image: url("../images/Arrow_drop_down_big.svg");
   background-position: right 10px center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
-
 .timer-display {
   height: 140px;
   width: 100%;
@@ -68,21 +66,18 @@ li {
   align-items: center;
   justify-content: space-between;
 }
-
 .timer-display-time {
   font-size: 64px;
   font-weight: bold;
   text-align: center;
   width: 70%;
 }
-
 .timer-display-button {
   background: none;
   border: none;
   border-radius: 100%;
   width: 30%;
 }
-
 .timer-display-button img {
   border-radius: 100%;
   color: #ccc;
@@ -90,13 +85,9 @@ li {
   height: 100px;
   width: 100px;
 }
-
 .timer-display-button img:hover {
   filter: opacity(80%);
 }
-
 .timer-display-button .clear {
   display: none;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

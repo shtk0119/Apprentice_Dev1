@@ -1,5 +1,4 @@
 <?php
-
 $user_id = $_SESSION['user_id']; // 'user_id'をセッション変数として設定
 
 //データベース接続
@@ -36,3 +35,4 @@ if ($result !== false && isset($result['id'])) {
 } else {
   $report_id = '';
 }
+?>

@@ -70,7 +70,7 @@ body {
   padding-bottom: 25px;
 }
 
-div>input[type=submit] {
+div > input[type=submit] {
   display: block;
   margin: 0 auto;
   margin-top: 5px;
@@ -81,7 +81,7 @@ div>input[type=submit] {
   border-radius: 5px;
 }
 
-div>input[type=submit] {
+div > input[type=submit] {
   background-color: #07B53B;
   color: #fff;
   border: solid 1px #07B53B;
@@ -109,4 +109,4 @@ input {
 .login_p {
   font-size: small;
   text-align: center;
-}
+}/*# sourceMappingURL=style.css.map */
